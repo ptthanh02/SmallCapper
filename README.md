@@ -4,7 +4,7 @@ Convert regular text to small caps text with this simple web-based tool. SmallCa
 
 ## 🔗 [Try it live](https://ptthanh02.github.io/SmallCapper/)
 
-![SmallCapper Screenshot](/api/placeholder/800/400)
+![image](https://github.com/user-attachments/assets/057d09c8-ee05-4284-a7ff-ac4612a7f89d)
 
 ## Features
 
@@ -22,17 +22,6 @@ Convert regular text to small caps text with this simple web-based tool. SmallCa
 3. Click "Convert to Small Caps"
 4. View the results in both CSS small caps (preview) and Unicode small caps
 5. Copy the Unicode small caps result to use anywhere
-
-## Hosting on GitHub Pages
-
-This project is designed to be hosted on GitHub Pages, which is completely free. Follow these steps to set it up:
-
-1. Fork or clone this repository
-2. Go to repository Settings
-3. Navigate to "Pages" in the sidebar
-4. Under "Source", select "main" branch
-5. Save the settings
-6. Your site will be published at `https://ptthanh02.github.io/SmallCapper/`
 
 ## Technical Details
 
