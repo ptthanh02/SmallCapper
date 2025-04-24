@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SmallCapper - Convert Text to Small Caps</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f7f7f7;
+            color: #333;
+        }
+        h1 {
+            color: #2c3e50;
+            text-align: center;
+        }
+        .container {
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        textarea {
+            width: 100%;
+            height: 150px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 16px;
+            margin-bottom: 15px;
+            resize: vertical;
+        }
+        .result {
+            width: 100%;
+            min-height: 150px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            background-color: #f9f9f9;
+            font-size: 16px;
+            margin-bottom: 15px;
+            font-variant: small-caps;
+        }
+        button {
+            background-color: #3498db;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s;
+        }
+        button:hover {
+            background-color: #2980b9;
+        }
+        .buttons {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+        }
+        footer {
+            text-align: center;
+            margin-top: 30px;
+            color: #7f8c8d;
+            font-size: 14px;
+        }
+        .github-link {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 20px;
+        }
+        .github-link a {
+            color: #333;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+        }
+        .github-link svg {
+            margin-right: 8px;
+        }
+    </style>
+</head>
+<body>
+    <h1>SmallCapper</h1>
+    <div class="container">
+        <p>Enter your text below and convert it to small caps with a single click!</p>
+        
+        <textarea id="inputText" placeholder="Enter your text here..."></textarea>
+        
+        <div class="buttons">
+            <button onclick="convertToSmallCaps()">Convert to Small Caps</button>
+            <button onclick="copyToClipboard()">Copy Result</button>
+            <button onclick="clearAll()">Clear All</button>
+        </div>
+        
+        <p>Result (preview with CSS small-caps):</p>
+        <div class="result" id="result"></div>
+        
+        <p>Unicode Small Caps (works anywhere):</p>
+        <div class="result" id="unicodeResult" style="font-variant: normal;"></div>
+    </div>
+    
+    <div class="github-link">
+        <a href="https://github.com/ptthanh02/SmallCapper" target="_blank">
+            <svg height="24" width="24" viewBox="0 0 16 16" version="1.1">
+                <path fill-rule="evenodd" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"></path>
+            </svg>
+            View on GitHub
+        </a>
+    </div>
+    
+    <footer>
+        <p>Created with 💙 by ptthanh02 | <a href="https://github.com/ptthanh02/SmallCapper">SmallCapper</a></p>
+    </footer>
+
+    <script>
+        function convertToSmallCaps() {
+            const inputText = document.getElementById('inputText').value;
+            
+            // Display in CSS small-caps (for preview)
+            document.getElementById('result').textContent = inputText;
+            
+            // Convert to actual Unicode small caps where possible
+            const unicodeSmallCaps = convertToUnicodeSmallCaps(inputText);
+            document.getElementById('unicodeResult').textContent = unicodeSmallCaps;
+        }
+        
+        function convertToUnicodeSmallCaps(text) {
+            // Map of regular characters to small caps Unicode characters
+            const smallCapsMap = {
+                'a': 'ᴀ', 'b': 'ʙ', 'c': 'ᴄ', 'd': 'ᴅ', 'e': 'ᴇ', 'f': 'ꜰ', 
+                'g': 'ɢ', 'h': 'ʜ', 'i': 'ɪ', 'j': 'ᴊ', 'k': 'ᴋ', 'l': 'ʟ', 
+                'm': 'ᴍ', 'n': 'ɴ', 'o': 'ᴏ', 'p': 'ᴘ', 'q': 'ǫ', 'r': 'ʀ', 
+                's': 's', 't': 'ᴛ', 'u': 'ᴜ', 'v': 'ᴠ', 'w': 'ᴡ', 'x': 'x', 
+                'y': 'ʏ', 'z': 'ᴢ'
+            };
+            
+            return text.split('').map(char => {
+                if (char.toLowerCase() in smallCapsMap && char === char.toLowerCase()) {
+                    return smallCapsMap[char.toLowerCase()];
+                } else {
+                    return char;
+                }
+            }).join('');
+        }
+        
+        function copyToClipboard() {
+            const resultText = document.getElementById('unicodeResult').textContent;
+            navigator.clipboard.writeText(resultText)
+                .then(() => {
+                    alert('Text copied to clipboard!');
+                })
+                .catch(err => {
+                    console.error('Failed to copy text: ', err);
+                    alert('Failed to copy text. Please try again or copy manually.');
+                });
+        }
+        
+        function clearAll() {
+            document.getElementById('inputText').value = '';
+            document.getElementById('result').textContent = '';
+            document.getElementById('unicodeResult').textContent = '';
+        }
+    </script>
+</body>
+</html>
